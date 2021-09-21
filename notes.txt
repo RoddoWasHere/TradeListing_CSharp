@@ -1,0 +1,21 @@
+Tutorial:
+
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio
+https://docs.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-5.0
+
+https://www.youtube.com/watch?v=Br8H-TuSSO8
+
+https://www.c-sharpcorner.com/article/tutorial-use-entity-framework-core-5-0-in-net-core-3-1-with-mysql-database-by2/
+
+https://www.youtube.com/watch?v=7rY9vKB_BdA
+
+
+Migration:
+
+Tools > NuGet Package Manager > Package Manager Console
+
+Create migration:
+> add-migration <name> -Context MyDbContext
+
+Run Migration:
+> update-database -Context MyDbContext
