@@ -16,6 +16,9 @@ Tools > NuGet Package Manager > Package Manager Console
 
 Create migration:
 > add-migration <name> -Context MyDbContext
+> add-migration initial -Context MyDbContext
 
 Run Migration:
 > update-database -Context MyDbContext
+
+> drop-database -Context MyDbContext

@@ -13,6 +13,8 @@ namespace TradingAPI.Data {
 
         public DbSet<Person> Person { get; set; }
 
-         
+        public DbSet<Instrument> Instrument { get; set; }
+        public DbSet<InstrumentPair> InstrumentPair { get; set; }
+
     }
 }

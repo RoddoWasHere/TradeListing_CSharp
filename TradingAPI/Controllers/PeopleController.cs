@@ -45,6 +45,21 @@ namespace TradingAPI.Controllers
             //return await _context.Person.ToListAsync();
         }
 
+        [HttpGet("exchangeInfoSave")]
+        public async Task<ActionResult<BinanceExchangeInfo>> GetExchangeInfoSave()
+        {
+            WebCallResult<BinanceExchangeInfo> exchangeInfo = await _client.Spot.System.GetExchangeInfoAsync();
+
+
+            //fetch exchange info
+
+
+
+            return exchangeInfo.Data;
+            //return await _context.Person.ToListAsync();
+        }
+
+
         [HttpGet("prices")]
         public async Task<IEnumerable<BinancePrice>> GetPrices()
         {
@@ -76,6 +91,130 @@ namespace TradingAPI.Controllers
 
             return products.Data;
             //return await _context.Person.ToListAsync();
+        }
+
+
+        [HttpGet("coinsSave")]
+        public async Task<IEnumerable<InstrumentPair>> GetCoinsAndSave()//test
+        {
+
+            bool shouldFetchFromAPI = _context.Instrument.Count() == 0 || _context.InstrumentPair.Count() == 0;
+
+            List<Instrument> curInstruments = _context.Instrument.ToList();
+            List<InstrumentPair> curPairs = _context.InstrumentPair.ToList();
+
+            Dictionary<string, InstrumentPair> curPairsLookup = curPairs.ToDictionary(i => i.Symbol);
+            Dictionary<string, Instrument> curInstrLookup = curInstruments.ToDictionary(i => i.Symbol);
+
+            Dictionary<string, Instrument> instTp = curInstrLookup;// new Dictionary<string, Instrument>();
+            Dictionary<string, InstrumentPair> pairsTp = curPairsLookup;// new Dictionary<string, InstrumentPair>();
+
+            IEnumerable<Instrument> instResult;// = instTp.Values.ToList();
+            IEnumerable<InstrumentPair> pairsResult;// = pairsTp.Values.ToList();
+
+            if (shouldFetchFromAPI)
+            {
+                //fetch products...
+                Console.WriteLine("fetching form API...");
+                WebCallResult<IEnumerable<BinanceProduct>> products = await _client.General.GetProductsAsync();
+
+                foreach (BinanceProduct p in products.Data)
+                {
+
+                    if (!instTp.ContainsKey(p.BaseAsset))
+                    {
+                        instTp[p.BaseAsset] = new Instrument
+                        {
+                            Symbol = p.BaseAsset,
+                            SymbolChar = p.BaseAssetChar,
+                            SymbolName = p.BaseAssetName,
+                            Type = "",//ignore for now
+                        };
+                    }
+                    if (!instTp.ContainsKey(p.QuoteAsset))
+                    {
+                        instTp[p.QuoteAsset] = new Instrument
+                        {
+                            Symbol = p.QuoteAsset,
+                            SymbolChar = p.QuoteAssetChar,
+                            SymbolName = p.QuoteAssetName,
+                            Type = "",//ignore for now
+                        };
+                    }
+                    if (!pairsTp.ContainsKey(p.Symbol))
+                    {
+                        pairsTp[p.Symbol] = new InstrumentPair()
+                        {
+                            Symbol = p.Symbol,
+                            BaseInstrument = instTp[p.BaseAsset],
+                            QuoteInstrument = instTp[p.QuoteAsset],
+                        };
+                    }
+                }
+
+
+                //fetch exhange info
+
+
+
+                //List<> 
+                WebCallResult<BinanceExchangeInfo> exchangeInfo = await _client.Spot.System.GetExchangeInfoAsync();
+                List<BinanceSymbol> symbols = exchangeInfo.Data.Symbols.ToList();
+                Dictionary<string, BinanceSymbol> symbolLookup = symbols.ToDictionary(s => s.Name);
+
+                //update pairs info from fetched data
+
+                foreach (InstrumentPair p in pairsTp.Values) {
+                    BinanceSymbol b;
+                    if (symbolLookup.TryGetValue(p.Symbol, out b)) { //found 
+                        p.IceBergAllowed = b.IceBergAllowed;
+                        p.IsMarginTradingAllowed = b.IsMarginTradingAllowed;
+                        p.IsSpotTradingAllowed = b.IsSpotTradingAllowed;
+                        p.OcoAllowed = b.OCOAllowed;
+                        p.QuoteCommissionPrecision = b.QuoteCommissionPrecision;
+                        p.QuoteOrderQuantityMarketAllowed = b.QuoteOrderQuantityMarketAllowed;
+                        p.BaseCommissionPrecision = b.BaseCommissionPrecision;
+                        //missing
+                        //b.BaseAssetPrecision
+                        //b.status ? 
+
+                        //b.Filters
+                        //+ othert filters .... b.IceBergPartsFilter
+
+                    }
+                    else {//not found 
+                        //??
+                    }
+
+                }
+
+
+
+                ////Do DB stuff
+                instResult = instTp.Values.ToList();
+                pairsResult = pairsTp.Values.ToList();
+
+                //if (_context.Instrument.Count() == 0)
+                //{
+                //    //_context.Instrument.AddRange(instResult);//.Where(instruments => );// .AddRange(instruments).Where();//use async + upsert
+                //    //_context.SaveChanges();
+                //}
+
+                //if (_context.InstrumentPair.Count() == 0)//???
+                //{
+                _context.InstrumentPair.AddRange(pairsResult);//.Where(instruments => );// .AddRange(instruments).Where();//use async + upsert
+                //                                                  //_context.SaveChanges();
+                //}
+
+                _context.SaveChanges();
+            }
+            else {
+                //use data from DB:
+                instResult = instTp.Values.ToList();
+                pairsResult = pairsTp.Values.ToList();
+
+            }
+            return pairsResult;
         }
 
 

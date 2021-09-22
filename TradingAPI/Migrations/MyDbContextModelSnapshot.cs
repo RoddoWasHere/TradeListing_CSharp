@@ -16,6 +16,66 @@ namespace TradingAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
 
+            modelBuilder.Entity("TradingAPI.Data.Instrument", b =>
+                {
+                    b.Property<string>("Symbol")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("SymbolChar")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SymbolName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Symbol");
+
+                    b.ToTable("Instrument");
+                });
+
+            modelBuilder.Entity("TradingAPI.Data.InstrumentPair", b =>
+                {
+                    b.Property<string>("Symbol")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<int>("BaseCommissionPrecision")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BaseInstrumentSymbol")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<bool>("IceBergAllowed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsMarginTradingAllowed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsSpotTradingAllowed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("OcoAllowed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("QuoteCommissionPrecision")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuoteInstrumentSymbol")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<bool>("QuoteOrderQuantityMarketAllowed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Symbol");
+
+                    b.HasIndex("BaseInstrumentSymbol");
+
+                    b.HasIndex("QuoteInstrumentSymbol");
+
+                    b.ToTable("InstrumentPair");
+                });
+
             modelBuilder.Entity("TradingAPI.Data.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -37,6 +97,21 @@ namespace TradingAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Person");
+                });
+
+            modelBuilder.Entity("TradingAPI.Data.InstrumentPair", b =>
+                {
+                    b.HasOne("TradingAPI.Data.Instrument", "BaseInstrument")
+                        .WithMany()
+                        .HasForeignKey("BaseInstrumentSymbol");
+
+                    b.HasOne("TradingAPI.Data.Instrument", "QuoteInstrument")
+                        .WithMany()
+                        .HasForeignKey("QuoteInstrumentSymbol");
+
+                    b.Navigation("BaseInstrument");
+
+                    b.Navigation("QuoteInstrument");
                 });
 #pragma warning restore 612, 618
         }

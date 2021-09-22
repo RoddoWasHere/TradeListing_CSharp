@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using TradingAPI.Data;
+using TradingAPI.Schema;
 
 namespace TradingAPI
 {
@@ -35,6 +36,11 @@ namespace TradingAPI
             services.AddControllers();
             services.AddDbContext<TodoContext>(opt =>
                                    opt.UseInMemoryDatabase("TodoList"));
+
+            services
+                .AddGraphQLServer()
+                .AddQueryType<Query>();
+
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TradingAPI", Version = "v1" });
@@ -60,6 +66,7 @@ namespace TradingAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGraphQL();
             });
         }
     }
