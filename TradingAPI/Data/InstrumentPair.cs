@@ -1,7 +1,9 @@
+using HotChocolate.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,9 +13,19 @@ namespace TradingAPI.Data
     {
         //public int Id { get; set; }//PK
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Symbol { get; set; }//(symbol: e.g: BTCUSDT 4 lookups)
-        public Instrument BaseInstrument { get; set; }//FK
-        public Instrument QuoteInstrument { get; set; }//FK
+
+        //public string BaseInstrumentId { get; set; }//FK
+        //public string QuoteInstrumentId { get; set; }//FK
+
+        public virtual Instrument BaseInstrument { get; set; }//FK
+        public virtual Instrument QuoteInstrument { get; set; }//FK
+
+        //public string BaseInstrumentId { get; set; }//FK
+        //public string QuoteInstrumentId { get; set; }//FK
+
+
         public bool IceBergAllowed { get; set; }
         public bool IsSpotTradingAllowed { get; set; }
         public bool IsMarginTradingAllowed { get; set; }

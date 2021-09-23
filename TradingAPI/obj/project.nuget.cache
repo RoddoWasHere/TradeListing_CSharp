@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4GMqf1Jjw1lbuqSupNQq5utp4z5S8btAhDKL3UKsbBEtZFFbHIfk/BBwnNwojzGbysGWAqRzOH5Or+ctqEld3w==",
+  "dgSpecHash": "bsBvt5CKfFLxN7rlqR0+vhn9Dr3J2804UFvEpWI9lE4kPm1G3Vh7oLv3Zw07ug6yj3IvoszJboa4nTn60VIsMw==",
   "success": true,
   "projectFilePath": "C:\\xampp\\htdocs\\Ethereal\\TradeListing_CSharp\\TradingAPI\\TradingAPI.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate\\11.3.7\\hotchocolate.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.abstractions\\11.3.7\\hotchocolate.abstractions.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.aspnetcore\\11.3.7\\hotchocolate.aspnetcore.11.3.7.nupkg.sha512",
+    "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.data\\11.3.7\\hotchocolate.data.11.3.7.nupkg.sha512",
+    "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.data.entityframework\\11.3.7\\hotchocolate.data.entityframework.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.execution\\11.3.7\\hotchocolate.execution.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.fetching\\11.3.7\\hotchocolate.fetching.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.language\\11.3.7\\hotchocolate.language.11.3.7.nupkg.sha512",
@@ -23,8 +25,11 @@
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.subscriptions.inmemory\\11.3.7\\hotchocolate.subscriptions.inmemory.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types\\11.3.7\\hotchocolate.types.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types.cursorpagination\\11.3.7\\hotchocolate.types.cursorpagination.11.3.7.nupkg.sha512",
+    "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types.filters\\10.5.5\\hotchocolate.types.filters.10.5.5.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types.offsetpagination\\11.3.7\\hotchocolate.types.offsetpagination.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types.scalars.upload\\11.3.7\\hotchocolate.types.scalars.upload.11.3.7.nupkg.sha512",
+    "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types.selections\\10.5.5\\hotchocolate.types.selections.10.5.5.nupkg.sha512",
+    "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.types.sorting\\10.5.5\\hotchocolate.types.sorting.10.5.5.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.utilities\\11.3.7\\hotchocolate.utilities.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.utilities.introspection\\11.3.7\\hotchocolate.utilities.introspection.11.3.7.nupkg.sha512",
     "C:\\Users\\s1100148\\.nuget\\packages\\hotchocolate.validation\\11.3.7\\hotchocolate.validation.11.3.7.nupkg.sha512",

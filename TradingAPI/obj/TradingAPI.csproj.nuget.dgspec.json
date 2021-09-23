@@ -52,6 +52,18 @@
               "target": "Package",
               "version": "[11.3.7, )"
             },
+            "HotChocolate.Data": {
+              "target": "Package",
+              "version": "[11.3.7, )"
+            },
+            "HotChocolate.Data.EntityFramework": {
+              "target": "Package",
+              "version": "[11.3.7, )"
+            },
+            "HotChocolate.Types.Selections": {
+              "target": "Package",
+              "version": "[10.5.5, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[5.0.10, )"

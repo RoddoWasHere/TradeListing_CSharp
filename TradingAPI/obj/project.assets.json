@@ -121,6 +121,33 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "HotChocolate.Data/11.3.7": {
+        "type": "package",
+        "dependencies": {
+          "HotChocolate.Execution": "11.3.7",
+          "HotChocolate.Types.CursorPagination": "11.3.7"
+        },
+        "compile": {
+          "lib/net5.0/HotChocolate.Data.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/HotChocolate.Data.dll": {}
+        }
+      },
+      "HotChocolate.Data.EntityFramework/11.3.7": {
+        "type": "package",
+        "dependencies": {
+          "HotChocolate": "11.3.7",
+          "HotChocolate.Data": "11.3.7",
+          "Microsoft.EntityFrameworkCore": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/HotChocolate.Data.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/HotChocolate.Data.EntityFramework.dll": {}
+        }
+      },
       "HotChocolate.Execution/11.3.7": {
         "type": "package",
         "dependencies": {
@@ -265,6 +292,18 @@
           "lib/net5.0/HotChocolate.Types.CursorPagination.dll": {}
         }
       },
+      "HotChocolate.Types.Filters/10.5.5": {
+        "type": "package",
+        "dependencies": {
+          "HotChocolate.Types": "10.5.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/HotChocolate.Types.Filters.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/HotChocolate.Types.Filters.dll": {}
+        }
+      },
       "HotChocolate.Types.OffsetPagination/11.3.7": {
         "type": "package",
         "dependencies": {
@@ -287,6 +326,33 @@
         },
         "runtime": {
           "lib/net5.0/HotChocolate.Types.Scalars.Upload.dll": {}
+        }
+      },
+      "HotChocolate.Types.Selections/10.5.5": {
+        "type": "package",
+        "dependencies": {
+          "HotChocolate": "10.5.5",
+          "HotChocolate.Types": "10.5.5",
+          "HotChocolate.Types.Filters": "10.5.5",
+          "HotChocolate.Types.Sorting": "10.5.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/HotChocolate.Types.Selections.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/HotChocolate.Types.Selections.dll": {}
+        }
+      },
+      "HotChocolate.Types.Sorting/10.5.5": {
+        "type": "package",
+        "dependencies": {
+          "HotChocolate.Types": "10.5.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/HotChocolate.Types.Sorting.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/HotChocolate.Types.Sorting.dll": {}
         }
       },
       "HotChocolate.Utilities/11.3.7": {
@@ -2696,6 +2762,32 @@
         "lib/netcoreapp3.1/HotChocolate.AspNetCore.dll"
       ]
     },
+    "HotChocolate.Data/11.3.7": {
+      "sha512": "nVzLsRBEUt8x9dg4UbWh9l21F0QenYUUGDZE/oXt85VRmUlvNTYKlE6wUvXywIWq7ZnXsFRSX2ZFhm6QHH7iwA==",
+      "type": "package",
+      "path": "hotchocolate.data/11.3.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hotchocolate.data.11.3.7.nupkg.sha512",
+        "hotchocolate.data.nuspec",
+        "lib/net5.0/HotChocolate.Data.dll",
+        "lib/netcoreapp3.1/HotChocolate.Data.dll",
+        "lib/netstandard2.0/HotChocolate.Data.dll"
+      ]
+    },
+    "HotChocolate.Data.EntityFramework/11.3.7": {
+      "sha512": "88Cw4wbOdmZvULUQVs9Y3oKpGd7m+4N7+FDBZgxK5IYPGYcWTdWr42Ie5AhfjIDZs5/A9QIGBImpEHPi1u0kbA==",
+      "type": "package",
+      "path": "hotchocolate.data.entityframework/11.3.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hotchocolate.data.entityframework.11.3.7.nupkg.sha512",
+        "hotchocolate.data.entityframework.nuspec",
+        "lib/netstandard2.1/HotChocolate.Data.EntityFramework.dll"
+      ]
+    },
     "HotChocolate.Execution/11.3.7": {
       "sha512": "6rIydEyMTKytFqSi0hIkC68slDFWMLEleNLUS3636bVljzKQ6rJ2a/KMNwk6/5UxsSVcYmHApbHx0jbZaxxipg==",
       "type": "package",
@@ -2836,6 +2928,23 @@
         "lib/netstandard2.0/HotChocolate.Types.CursorPagination.dll"
       ]
     },
+    "HotChocolate.Types.Filters/10.5.5": {
+      "sha512": "0sEqSRXAsPSbU35CxqkNQ05Jo5rd3i82yMbF1vB6pQMkwtcm7HV/asmTXPsYeePAdQYwi/z1R2Z+pSFqyn+wcw==",
+      "type": "package",
+      "path": "hotchocolate.types.filters/10.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hotchocolate.types.filters.10.5.5.nupkg.sha512",
+        "hotchocolate.types.filters.nuspec",
+        "lib/net461/HotChocolate.Types.Filters.dll",
+        "lib/net461/HotChocolate.Types.Filters.pdb",
+        "lib/net461/Types.Filters.xml",
+        "lib/netstandard2.0/HotChocolate.Types.Filters.dll",
+        "lib/netstandard2.0/HotChocolate.Types.Filters.pdb",
+        "lib/netstandard2.0/Types.Filters.xml"
+      ]
+    },
     "HotChocolate.Types.OffsetPagination/11.3.7": {
       "sha512": "mvUZbwGlYE3jdL93ZlewsFNK+w13Nj9LbMPcrRse8GgyXrcLWoJ8SuUFyXRpqvJJdXHMXHkKDp1+GO6giyHJjg==",
       "type": "package",
@@ -2862,6 +2971,40 @@
         "lib/net5.0/HotChocolate.Types.Scalars.Upload.dll",
         "lib/netcoreapp3.1/HotChocolate.Types.Scalars.Upload.dll",
         "lib/netstandard2.0/HotChocolate.Types.Scalars.Upload.dll"
+      ]
+    },
+    "HotChocolate.Types.Selections/10.5.5": {
+      "sha512": "A1qa6btanOxbxJzf0uz2hh48kHFODWBy1iBQ9OLJ/Pz9T3VgZZwhr6mL52RnnS+1bC//Cb3rKEi8PNPvnK/bdA==",
+      "type": "package",
+      "path": "hotchocolate.types.selections/10.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hotchocolate.types.selections.10.5.5.nupkg.sha512",
+        "hotchocolate.types.selections.nuspec",
+        "lib/net461/HotChocolate.Types.Selections.dll",
+        "lib/net461/HotChocolate.Types.Selections.pdb",
+        "lib/net461/Types.Selections.xml",
+        "lib/netstandard2.0/HotChocolate.Types.Selections.dll",
+        "lib/netstandard2.0/HotChocolate.Types.Selections.pdb",
+        "lib/netstandard2.0/Types.Selections.xml"
+      ]
+    },
+    "HotChocolate.Types.Sorting/10.5.5": {
+      "sha512": "AJZykp2E3j5h1yrAR2PqBMlLinBJmWsnC0/j0mQiwpEL7SvZiJ5qbFbQs3jxllotSW5BDRpWQHPe5uzEU5NGbg==",
+      "type": "package",
+      "path": "hotchocolate.types.sorting/10.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hotchocolate.types.sorting.10.5.5.nupkg.sha512",
+        "hotchocolate.types.sorting.nuspec",
+        "lib/net461/HotChocolate.Types.Sorting.dll",
+        "lib/net461/HotChocolate.Types.Sorting.pdb",
+        "lib/net461/Types.Sorting.xml",
+        "lib/netstandard2.0/HotChocolate.Types.Sorting.dll",
+        "lib/netstandard2.0/HotChocolate.Types.Sorting.pdb",
+        "lib/netstandard2.0/Types.Sorting.xml"
       ]
     },
     "HotChocolate.Utilities/11.3.7": {
@@ -8365,6 +8508,9 @@
       "Binance.Net >= 7.2.0",
       "FlexLabs.EntityFrameworkCore.Upsert >= 5.0.0",
       "HotChocolate.AspNetCore >= 11.3.7",
+      "HotChocolate.Data >= 11.3.7",
+      "HotChocolate.Data.EntityFramework >= 11.3.7",
+      "HotChocolate.Types.Selections >= 10.5.5",
       "Microsoft.EntityFrameworkCore.InMemory >= 5.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.9",
@@ -8424,6 +8570,18 @@
           "HotChocolate.AspNetCore": {
             "target": "Package",
             "version": "[11.3.7, )"
+          },
+          "HotChocolate.Data": {
+            "target": "Package",
+            "version": "[11.3.7, )"
+          },
+          "HotChocolate.Data.EntityFramework": {
+            "target": "Package",
+            "version": "[11.3.7, )"
+          },
+          "HotChocolate.Types.Selections": {
+            "target": "Package",
+            "version": "[10.5.5, )"
           },
           "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",

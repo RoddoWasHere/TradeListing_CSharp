@@ -36,6 +36,9 @@
           "Binance.Net": "7.2.0",
           "FlexLabs.EntityFrameworkCore.Upsert": "5.0.0",
           "HotChocolate.AspNetCore": "11.3.7",
+          "HotChocolate.Data": "11.3.7",
+          "HotChocolate.Data.EntityFramework": "11.3.7",
+          "HotChocolate.Types.Selections": "10.5.5",
           "Microsoft.EntityFrameworkCore.InMemory": "5.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.9",
@@ -466,6 +469,37 @@
           "lib/net5.0/HotChocolate.AspNetCore.dll": {}
         }
       },
+      "HotChocolate.Data/11.3.7": {
+        "dependencies": {
+          "HotChocolate.Execution": "11.3.7",
+          "HotChocolate.Types.CursorPagination": "11.3.7"
+        },
+        "runtime": {
+          "lib/net5.0/HotChocolate.Data.dll": {
+            "assemblyVersion": "11.3.7.0",
+            "fileVersion": "11.3.7.0"
+          }
+        },
+        "compile": {
+          "lib/net5.0/HotChocolate.Data.dll": {}
+        }
+      },
+      "HotChocolate.Data.EntityFramework/11.3.7": {
+        "dependencies": {
+          "HotChocolate": "11.3.7",
+          "HotChocolate.Data": "11.3.7",
+          "Microsoft.EntityFrameworkCore": "5.0.10"
+        },
+        "runtime": {
+          "lib/netstandard2.1/HotChocolate.Data.EntityFramework.dll": {
+            "assemblyVersion": "11.3.7.0",
+            "fileVersion": "11.3.7.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/HotChocolate.Data.EntityFramework.dll": {}
+        }
+      },
       "HotChocolate.Execution/11.3.7": {
         "dependencies": {
           "HotChocolate.Abstractions": "11.3.7",
@@ -630,6 +664,20 @@
           "lib/net5.0/HotChocolate.Types.CursorPagination.dll": {}
         }
       },
+      "HotChocolate.Types.Filters/10.5.5": {
+        "dependencies": {
+          "HotChocolate.Types": "11.3.7"
+        },
+        "runtime": {
+          "lib/netstandard2.0/HotChocolate.Types.Filters.dll": {
+            "assemblyVersion": "10.5.5.0",
+            "fileVersion": "10.5.5.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/HotChocolate.Types.Filters.dll": {}
+        }
+      },
       "HotChocolate.Types.OffsetPagination/11.3.7": {
         "dependencies": {
           "HotChocolate.Types": "11.3.7"
@@ -656,6 +704,37 @@
         },
         "compile": {
           "lib/net5.0/HotChocolate.Types.Scalars.Upload.dll": {}
+        }
+      },
+      "HotChocolate.Types.Selections/10.5.5": {
+        "dependencies": {
+          "HotChocolate": "11.3.7",
+          "HotChocolate.Types": "11.3.7",
+          "HotChocolate.Types.Filters": "10.5.5",
+          "HotChocolate.Types.Sorting": "10.5.5"
+        },
+        "runtime": {
+          "lib/netstandard2.0/HotChocolate.Types.Selections.dll": {
+            "assemblyVersion": "10.5.5.0",
+            "fileVersion": "10.5.5.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/HotChocolate.Types.Selections.dll": {}
+        }
+      },
+      "HotChocolate.Types.Sorting/10.5.5": {
+        "dependencies": {
+          "HotChocolate.Types": "11.3.7"
+        },
+        "runtime": {
+          "lib/netstandard2.0/HotChocolate.Types.Sorting.dll": {
+            "assemblyVersion": "10.5.5.0",
+            "fileVersion": "10.5.5.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/HotChocolate.Types.Sorting.dll": {}
         }
       },
       "HotChocolate.Utilities/11.3.7": {
@@ -4133,6 +4212,20 @@
       "path": "hotchocolate.aspnetcore/11.3.7",
       "hashPath": "hotchocolate.aspnetcore.11.3.7.nupkg.sha512"
     },
+    "HotChocolate.Data/11.3.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nVzLsRBEUt8x9dg4UbWh9l21F0QenYUUGDZE/oXt85VRmUlvNTYKlE6wUvXywIWq7ZnXsFRSX2ZFhm6QHH7iwA==",
+      "path": "hotchocolate.data/11.3.7",
+      "hashPath": "hotchocolate.data.11.3.7.nupkg.sha512"
+    },
+    "HotChocolate.Data.EntityFramework/11.3.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-88Cw4wbOdmZvULUQVs9Y3oKpGd7m+4N7+FDBZgxK5IYPGYcWTdWr42Ie5AhfjIDZs5/A9QIGBImpEHPi1u0kbA==",
+      "path": "hotchocolate.data.entityframework/11.3.7",
+      "hashPath": "hotchocolate.data.entityframework.11.3.7.nupkg.sha512"
+    },
     "HotChocolate.Execution/11.3.7": {
       "type": "package",
       "serviceable": true,
@@ -4203,6 +4296,13 @@
       "path": "hotchocolate.types.cursorpagination/11.3.7",
       "hashPath": "hotchocolate.types.cursorpagination.11.3.7.nupkg.sha512"
     },
+    "HotChocolate.Types.Filters/10.5.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0sEqSRXAsPSbU35CxqkNQ05Jo5rd3i82yMbF1vB6pQMkwtcm7HV/asmTXPsYeePAdQYwi/z1R2Z+pSFqyn+wcw==",
+      "path": "hotchocolate.types.filters/10.5.5",
+      "hashPath": "hotchocolate.types.filters.10.5.5.nupkg.sha512"
+    },
     "HotChocolate.Types.OffsetPagination/11.3.7": {
       "type": "package",
       "serviceable": true,
@@ -4216,6 +4316,20 @@
       "sha512": "sha512-SPBTilXtWyAhcJEsH7tdTIlTLpCwkCIOOtS5fEKJtFOmgqyvorHFUVVSVMd0ofOAZbDg0dUgLnB1oIj2a95RMg==",
       "path": "hotchocolate.types.scalars.upload/11.3.7",
       "hashPath": "hotchocolate.types.scalars.upload.11.3.7.nupkg.sha512"
+    },
+    "HotChocolate.Types.Selections/10.5.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A1qa6btanOxbxJzf0uz2hh48kHFODWBy1iBQ9OLJ/Pz9T3VgZZwhr6mL52RnnS+1bC//Cb3rKEi8PNPvnK/bdA==",
+      "path": "hotchocolate.types.selections/10.5.5",
+      "hashPath": "hotchocolate.types.selections.10.5.5.nupkg.sha512"
+    },
+    "HotChocolate.Types.Sorting/10.5.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AJZykp2E3j5h1yrAR2PqBMlLinBJmWsnC0/j0mQiwpEL7SvZiJ5qbFbQs3jxllotSW5BDRpWQHPe5uzEU5NGbg==",
+      "path": "hotchocolate.types.sorting/10.5.5",
+      "hashPath": "hotchocolate.types.sorting.10.5.5.nupkg.sha512"
     },
     "HotChocolate.Utilities/11.3.7": {
       "type": "package",

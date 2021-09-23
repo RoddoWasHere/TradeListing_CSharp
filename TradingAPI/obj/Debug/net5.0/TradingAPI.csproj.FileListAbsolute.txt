@@ -166,3 +166,8 @@ C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChoc
 C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChocolate.Validation.dll
 C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
 C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\FlexLabs.EntityFrameworkCore.Upsert.dll
+C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChocolate.Types.Filters.dll
+C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChocolate.Types.Selections.dll
+C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChocolate.Types.Sorting.dll
+C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChocolate.Data.dll
+C:\xampp\htdocs\Ethereal\TradeListing_CSharp\TradingAPI\bin\Debug\net5.0\HotChocolate.Data.EntityFramework.dll

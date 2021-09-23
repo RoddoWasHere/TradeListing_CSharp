@@ -97,7 +97,7 @@ namespace TradingAPI.Controllers
         [HttpGet("coinsSave")]
         public async Task<IEnumerable<InstrumentPair>> GetCoinsAndSave()//test
         {
-
+            
             bool shouldFetchFromAPI = _context.Instrument.Count() == 0 || _context.InstrumentPair.Count() == 0;
 
             List<Instrument> curInstruments = _context.Instrument.ToList();

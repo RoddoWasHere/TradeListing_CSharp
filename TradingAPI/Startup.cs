@@ -15,6 +15,16 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using TradingAPI.Data;
 using TradingAPI.Schema;
+using TradingAPI.Controllers;
+using HotChocolate;
+
+
+using System;
+
+using Microsoft.AspNetCore.Http;
+
+using HotChocolate.AspNetCore;
+using HotChocolate.Execution.Configuration;
 
 namespace TradingAPI
 {
@@ -37,9 +47,18 @@ namespace TradingAPI
             services.AddDbContext<TodoContext>(opt =>
                                    opt.UseInMemoryDatabase("TodoList"));
 
+
+            //services.AddPooledDbContextFactory<MyDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
+
             services
                 .AddGraphQLServer()
+                .AddProjections()
                 .AddQueryType<Query>();
+            //services.AddGraphQL(
+            //    SchemaBuilder.New()
+            //        .AddQueryType<Query>()
+            //        .Create(),
+            //    new QueryExecutionOptions { ForceSerialExecution = true });
 
             //services.AddSwaggerGen(c =>
             //{
