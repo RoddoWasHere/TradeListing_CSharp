@@ -65,10 +65,10 @@ namespace TradingAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varchar(767)");
 
-                    b.Property<string>("SymbolChar")
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("SymbolName")
+                    b.Property<string>("SymbolChar")
                         .HasColumnType("text");
 
                     b.Property<string>("Type")
@@ -88,7 +88,7 @@ namespace TradingAPI.Migrations
                     b.Property<int>("BaseCommissionPrecision")
                         .HasColumnType("int");
 
-                    b.Property<string>("BaseInstrumentSymbol")
+                    b.Property<string>("BaseInstrumentId")
                         .HasColumnType("varchar(767)");
 
                     b.Property<bool>("IceBergAllowed")
@@ -106,7 +106,7 @@ namespace TradingAPI.Migrations
                     b.Property<int>("QuoteCommissionPrecision")
                         .HasColumnType("int");
 
-                    b.Property<string>("QuoteInstrumentSymbol")
+                    b.Property<string>("QuoteInstrumentId")
                         .HasColumnType("varchar(767)");
 
                     b.Property<bool>("QuoteOrderQuantityMarketAllowed")
@@ -114,9 +114,9 @@ namespace TradingAPI.Migrations
 
                     b.HasKey("Symbol");
 
-                    b.HasIndex("BaseInstrumentSymbol");
+                    b.HasIndex("BaseInstrumentId");
 
-                    b.HasIndex("QuoteInstrumentSymbol");
+                    b.HasIndex("QuoteInstrumentId");
 
                     b.ToTable("InstrumentPair");
                 });
@@ -142,6 +142,46 @@ namespace TradingAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Person");
+                });
+
+            modelBuilder.Entity("TradingAPI.Data.PriceHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Close")
+                        .HasColumnType("decimal(10,10)");
+
+                    b.Property<decimal>("High")
+                        .HasColumnType("decimal(10,10)");
+
+                    b.Property<string>("InstrumentPairId")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<int>("Interval")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Low")
+                        .HasColumnType("decimal(10,10)");
+
+                    b.Property<decimal>("Open")
+                        .HasColumnType("decimal(10,10)");
+
+                    b.Property<int>("TradeCount")
+                        .HasColumnType("int");
+
+                    b.Property<long>("UtcCloseTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UtcOpenTime")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstrumentPairId");
+
+                    b.ToTable("PriceHistory");
                 });
 
             modelBuilder.Entity("TradingAPI.Data.Student", b =>
@@ -187,15 +227,24 @@ namespace TradingAPI.Migrations
                 {
                     b.HasOne("TradingAPI.Data.Instrument", "BaseInstrument")
                         .WithMany("BaseInstrumentPairs")
-                        .HasForeignKey("BaseInstrumentSymbol");
+                        .HasForeignKey("BaseInstrumentId");
 
                     b.HasOne("TradingAPI.Data.Instrument", "QuoteInstrument")
                         .WithMany("QuoteInstrumentPairs")
-                        .HasForeignKey("QuoteInstrumentSymbol");
+                        .HasForeignKey("QuoteInstrumentId");
 
                     b.Navigation("BaseInstrument");
 
                     b.Navigation("QuoteInstrument");
+                });
+
+            modelBuilder.Entity("TradingAPI.Data.PriceHistory", b =>
+                {
+                    b.HasOne("TradingAPI.Data.InstrumentPair", "InstrumentPair")
+                        .WithMany("PriceHistory")
+                        .HasForeignKey("InstrumentPairId");
+
+                    b.Navigation("InstrumentPair");
                 });
 
             modelBuilder.Entity("TradingAPI.Data.Course", b =>
@@ -208,6 +257,11 @@ namespace TradingAPI.Migrations
                     b.Navigation("BaseInstrumentPairs");
 
                     b.Navigation("QuoteInstrumentPairs");
+                });
+
+            modelBuilder.Entity("TradingAPI.Data.InstrumentPair", b =>
+                {
+                    b.Navigation("PriceHistory");
                 });
 
             modelBuilder.Entity("TradingAPI.Data.Student", b =>

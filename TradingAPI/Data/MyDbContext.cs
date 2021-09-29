@@ -15,6 +15,7 @@ namespace TradingAPI.Data {
 
         public DbSet<Instrument> Instrument { get; set; }
         public DbSet<InstrumentPair> InstrumentPair { get; set; }
+        public DbSet<PriceHistory> PriceHistory { get; set; }
 
 
         public DbSet<Student> Students { get; set; }
@@ -22,15 +23,29 @@ namespace TradingAPI.Data {
         public DbSet<Course> Courses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<InstrumentPair>()
-                .HasOne<Instrument>(p => p.BaseInstrument);
-                //.WithMany(i => i.BaseInstrumentPairs);
-            //.HasForeignKey(p => p.BaseInstrument);
+            modelBuilder.Entity<InstrumentPair>().HasKey(i => i.Symbol);
+            modelBuilder.Entity<InstrumentPair>().
+                HasOne(p => p.BaseInstrument).WithMany(i => i.BaseInstrumentPairs).HasForeignKey(p => p.BaseInstrumentId);
 
-            modelBuilder.Entity<InstrumentPair>()
-                .HasOne<Instrument>(p => p.QuoteInstrument);
-                //.WithMany(i => i.QuoteInstrumentPairs);
-            //.HasForeignKey(p => p.QuoteInstrument);
+            modelBuilder.Entity<InstrumentPair>().
+                HasOne(p => p.QuoteInstrument).WithMany(i => i.QuoteInstrumentPairs).HasForeignKey(p => p.QuoteInstrumentId);
+
+
+            modelBuilder.Entity<PriceHistory>().HasKey(h => h.Id);
+            //modelBuilder.Entity<PriceHistory>().HasKey(h => new { h.InstrumentPairId, h.Interval, h.UtcOpenTime });
+            modelBuilder.Entity<PriceHistory>().
+                HasOne(h => h.InstrumentPair).WithMany(p => p.PriceHistory).HasForeignKey(h => h.InstrumentPairId);
+
+
+            //modelBuilder.Entity<InstrumentPair>()
+            //    .HasOne<Instrument>(p => p.BaseInstrument);
+            //    //.WithMany(i => i.BaseInstrumentPairs);
+            ////.HasForeignKey(p => p.BaseInstrument);
+
+            //modelBuilder.Entity<InstrumentPair>()
+            //    .HasOne<Instrument>(p => p.QuoteInstrument);
+            //    //.WithMany(i => i.QuoteInstrumentPairs);
+            ////.HasForeignKey(p => p.QuoteInstrument);
 
             //modelBuilder.Entity<Instrument>()
             //    .HasMany<InstrumentPair>(p => p.BaseInstrumentPairs)

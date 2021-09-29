@@ -15,15 +15,17 @@ namespace TradingAPI.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Symbol { get; set; }//PK (symbol e.g.: BTC 4 lookups)
+        public string Name { get; set; }
         public string SymbolChar { get; set; }
-        public string SymbolName { get; set; }
+        
         public string Type { get; set; }//?
 
-        //[UseProjection]
-        //public virtual ICollection<InstrumentPair> BaseInstrumentPairs { get; set; }
 
         //[UseProjection]
-        //public virtual ICollection<InstrumentPair> QuoteInstrumentPairs { get; set; }
+        public virtual List<InstrumentPair> BaseInstrumentPairs { get; set; }
+
+        //[UseProjection]
+        public virtual List<InstrumentPair> QuoteInstrumentPairs { get; set; }
     }
 
     public class Course
