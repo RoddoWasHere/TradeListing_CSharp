@@ -33,13 +33,15 @@ namespace TradingAPI.Schema
         }
 
 
-        async Task<object> FetchHistoryFroApi(string symbol, MyDbContext _context)
+        async Task<object> FetchHistoryFromApi(string symbol, MyDbContext _context, KlineInterval klineInterval = KlineInterval.OneDay)
         {
 
-            var curHistory = _context.PriceHistory.Where(p => p.InstrumentPairId == symbol && p.Interval == KlineInterval.OneDay).ToDictionary(p => p.UtcOpenTime);
+            var curHistory = _context.PriceHistory.Where(p => p.InstrumentPairId == symbol && p.Interval == klineInterval).ToDictionary(p => p.UtcOpenTime);
             InstrumentPair instrPair = _context.InstrumentPair.Where(p => p.Symbol == symbol).First();
 
-            List<PriceHistory> newHistory = await TradingDbUtilies.GetPriceHistoryAsync(KlineInterval.OneDay, _client, curHistory, instrPair);
+            List<PriceHistory> newHistory = await TradingDbUtilies.GetPriceHistoryAsync(klineInterval, _client, curHistory, instrPair);
+
+            Console.WriteLine("Got new history from api: " + newHistory.Count);
 
             //Save to DB
             _context.PriceHistory.AddRange(newHistory);
@@ -86,8 +88,15 @@ namespace TradingAPI.Schema
         }
 
         [UseProjection]
-        public async Task<InstrumentPair> GetInstrumentPairHistory([Service] MyDbContext _context, string pairSymbol, long startUctTime, long endUctTime = -1)
-        {
+        public async Task<InstrumentPair> GetInstrumentPairHistory(
+            [Service] MyDbContext _context, 
+            string pairSymbol, 
+            long startUctTime, 
+            long endUctTime = -1,
+            KlineInterval klineInterval = KlineInterval.OneDay
+        ){
+
+            Console.WriteLine("---Getting InstrumentPairHistory for "+pairSymbol);
 
             //IQueryable<InstrumentPair>
             var pair = _context.InstrumentPair
@@ -118,13 +127,28 @@ namespace TradingAPI.Schema
 
             //var qTest = query.ToList();
 
-            var history = _context.PriceHistory.Where(h => h.InstrumentPairId == pairSymbol && startUctTime <= h.UtcOpenTime && h.UtcCloseTime <= endUctTime);
 
+            var history = _context.PriceHistory.Where(h => 
+                h.InstrumentPairId == pairSymbol
+                && h.Interval == klineInterval
+                && startUctTime <= h.UtcOpenTime 
+                && h.UtcCloseTime <= endUctTime
+            );
+            Console.WriteLine("Got current history: " + history.Count());
 
             if (history.Count() == 0) {
                 //fetch from api
-                var status = await FetchHistoryFroApi(pairSymbol, _context);
-                history = _context.PriceHistory.Where(h => h.InstrumentPairId == pairSymbol && startUctTime <= h.UtcOpenTime && h.UtcCloseTime <= endUctTime);
+                //Action<object> endTimeCondition = (h) => h.UtcCloseTime <= endUctTime;
+                //if
+
+                var status = await FetchHistoryFromApi(pairSymbol, _context, klineInterval);
+                history = _context.PriceHistory.Where(h =>
+                    h.InstrumentPairId == pairSymbol
+                    && h.Interval == klineInterval
+                    && (startUctTime == -1 || startUctTime <= h.UtcOpenTime)
+                    && (endUctTime == -1 || h.UtcCloseTime <= endUctTime)
+                );
+                Console.WriteLine("Got new history: " + history.Count());
             }
             //var pairCopy = new InstrumentPair { 
             //    Symbol = pair.Symbol,
