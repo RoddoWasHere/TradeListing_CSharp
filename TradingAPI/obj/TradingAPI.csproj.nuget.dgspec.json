@@ -90,6 +90,14 @@
               "target": "Package",
               "version": "[5.0.5, )"
             },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.3.3, )"
+            },
+            "Quartz.AspNetCore": {
+              "target": "Package",
+              "version": "[3.3.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"

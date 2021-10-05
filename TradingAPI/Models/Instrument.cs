@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using HotChocolate.Data;
 
-namespace TradingAPI.Data
+namespace TradingAPI.Models
 {
     public class Instrument
     {
