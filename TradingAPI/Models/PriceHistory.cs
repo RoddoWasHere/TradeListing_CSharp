@@ -19,7 +19,7 @@ namespace TradingAPI.Models
 
         public long UtcOpenTime { get; set; }
         public long UtcCloseTime { get; set; }
-        //TODO: get correct decimal points
+
         [Column(TypeName = "decimal(10,10)")]
         public decimal High { get; set; }
         [Column(TypeName = "decimal(10,10)")]

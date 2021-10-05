@@ -13,7 +13,7 @@ namespace TradingAPI.Utilites
 	public class PriceFetchConfig {
 		public TimeSpan scheduleInterval;
 		public KlineInterval klineInterval;
-		public int batchSize = 200;
+		public int batchSize = 50;
 
 		public DateTime lastCompletedUpdateTime = DateTime.Now;
         public PriceFetchConfig(TimeSpan scheduleInterval)

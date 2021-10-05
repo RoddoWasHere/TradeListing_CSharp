@@ -1,4 +1,5 @@
 # Trade Listing ASP.NET C# API + scheduler
+________________
 
 ## Setup
 
@@ -15,7 +16,7 @@ Steps
 
     > NuGet: `update-database`
 
-    > Command line: `dotnet ef database update`
+    > Command-line: `dotnet ef database update`
 
     Given that the build succeeds, we should now have a `defaulttest` database/schema.
 
@@ -25,11 +26,17 @@ Steps
 
 We should see a `Symbol tables successfully populated` message in the output.
 
-Setup complete
+Setup complete!
 
 ________________
 
 ## Architecture
+
+### Stack overview
+- ASP.Net Core API
+- Hot Chocolate (GraphQL)
+- Microsoft Entity Framework Core (Database entities)
+- Quartz.Net (Job scheduler)
 
 ### Database design
 

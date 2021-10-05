@@ -124,5 +124,4 @@ namespace TradingAPI.Schema
             return result;
         }
     }
-
 }

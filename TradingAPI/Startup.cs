@@ -1,30 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-//using Microsoft.AspNetCore.HttpsPolicy;
-//using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using Microsoft.Extensions.Logging;
-//using Microsoft.OpenApi.Models;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
 using TradingAPI.Data;
 using TradingAPI.Schema;
-using TradingAPI.Controllers;
 using HotChocolate;
-
-
 using System;
-
-using Microsoft.AspNetCore.Http;
-
-using HotChocolate.AspNetCore;
-using HotChocolate.Execution.Configuration;
 using System.Threading.Tasks;
 using System.Linq;
 using Binance.Net.Enums;
@@ -33,7 +16,6 @@ using System.Collections.Generic;
 using Binance.Net.Objects.Other;
 using TradingAPI.Utilites;
 using Quartz;
-using Microsoft.Extensions.Options;
 using CryptoExchange.Net.Objects;
 
 namespace TradingAPI
@@ -89,7 +71,7 @@ namespace TradingAPI
                     .WithIdentity("Combined Configuration Trigger")
                     .StartAt(DateBuilder.EvenSecondDate(DateTimeOffset.UtcNow.AddSeconds(60)))
                     //.StartNow()
-                    .WithDailyTimeIntervalSchedule(x => x.WithInterval(15, IntervalUnit.Second))
+                    .WithDailyTimeIntervalSchedule(x => x.WithInterval(30, IntervalUnit.Second))
                     .WithDescription("my awesome trigger configured for a job with single call")
                 );
             });
@@ -249,9 +231,8 @@ namespace TradingAPI
                     context.PriceHistory.Add(priceHistory4);
                     context.SaveChangesAsync();
 
-                    Console.WriteLine("Populated DB");
+                    Console.WriteLine("Populated DB test data");
                 }
-                //----
             }            
         }        
     }

@@ -11,7 +11,6 @@ namespace TradingAPI.Models
 {
     public class InstrumentPair
     {
-        //public int Id { get; set; }//PK
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Symbol { get; set; }//(symbol: e.g: BTCUSDT 4 lookups)
@@ -21,10 +20,6 @@ namespace TradingAPI.Models
 
         public virtual Instrument BaseInstrument { get; set; }//FK
         public virtual Instrument QuoteInstrument { get; set; }//FK
-
-        //public string BaseInstrumentId { get; set; }//FK
-        //public string QuoteInstrumentId { get; set; }//FK
-
 
         public bool IceBergAllowed { get; set; }
         public bool IsSpotTradingAllowed { get; set; }

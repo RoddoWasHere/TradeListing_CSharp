@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TradingAPI.Data;
 using Binance.Net;
 using Binance.Net.Objects;
@@ -14,17 +12,14 @@ using Binance.Net.Interfaces;
 using Binance.Net.Objects.Other;
 using CryptoExchange.Net.Authentication;
 using Binance.Net.Enums;
-using System.Collections.Concurrent;
 using TradingAPI.Models;
 using TradingAPI.Utilites;
 
 namespace TradingAPI.Controllers
 {
     /*
-    Mostly just REST API endpoints here for testing
-    with the exception of PopulateDbTablesFromApi, which
-    initializes the instrument symbols.
-    See Query.cs for Graph API used in the application
+    Just REST API endpoints here in this controller for testing    
+    See Query.cs for Graph API used in the application 
     */
     [Route("")]
     [ApiController]
@@ -106,130 +101,8 @@ namespace TradingAPI.Controllers
 
             return new { count = all.Count };
         }
-
-
-        //[HttpGet("allHistory")]
-        //public async Task<object> GetAllHistoryAsync()
-        //{ // TODO clean-up
-
-        //    var pairs_all = _context.InstrumentPair.ToList();
-        //    var pairs = pairs_all.GetRange(100, 200);//4 testing
-
-
-        //    int remCount = pairs.Count;//count async tasks
-
-        //    ConcurrentBag<List<PriceHistory>> concurrentHistory = new ConcurrentBag<List<PriceHistory>>();
-        //    List<List<PriceHistory>> allHistory = new List<List<PriceHistory>>();
-
-        //    Task<object> resultTask = new Task<object>(() =>
-        //    {
-        //        Console.WriteLine("running return task ");
-        //        return new { status = "fetching data async" };
-        //    });
-
-        //    Action<List<PriceHistory>> onCompleted = (List<PriceHistory> result) =>
-        //    {
-        //        remCount--;
-
-        //        if (remCount <= 0)
-        //        { //all tasks have completed
-
-        //            var allHistoryFlat = new List<PriceHistory>();
-        //            foreach (var p in allHistory)
-        //            {
-        //                allHistoryFlat.AddRange(p);
-        //            }
-
-        //            Console.WriteLine("all tasks complete with count: " + allHistoryFlat.Count);
-
-
-        //            _context.PriceHistory.AddRange(allHistoryFlat);
-        //            _context.SaveChanges();
-
-        //            resultTask.RunSynchronously();
-
-        //        }
-
-        //    };
-
-        //    Action<Task<List<PriceHistory>>> hasCompleted = async (PriceHistoryTp) =>
-        //    {
-
-        //        PriceHistoryTp.Wait();
-        //        List<PriceHistory> historyTp = PriceHistoryTp.Result;
-        //        bool gotLock = false;
-        //        lock (allHistory)
-        //        {
-        //            allHistory.Add(historyTp);
-        //            gotLock = true;
-        //        }
-        //        if (!gotLock)
-        //            Console.WriteLine("<-----missed lock" + historyTp.Count);
-
-        //        Console.WriteLine("completed task with len:" + historyTp.Count);
-
-        //        onCompleted(historyTp);
-        //    };
-
-
-        //    foreach (var pair in pairs)
-        //    {
-        //        string symbol = pair.Symbol;
-
-        //        var curHistoryQuery = _context.PriceHistory.Where(p => p.InstrumentPairId == symbol && p.Interval == KlineInterval.OneDay);
-        //        var curHistory = curHistoryQuery.ToDictionary(p => p.UtcOpenTime);
-        //        var curHistoryList = curHistoryQuery.ToList();
-        //        InstrumentPair instrPair = _context.InstrumentPair.Where(p => p.Symbol == symbol).First();
-
-        //        Console.WriteLine("getting history for " + pair.Symbol);
-        //        curHistoryList.Sort((a, b) => a.UtcCloseTime.CompareTo(b.UtcCloseTime));//asc order (oldest first)
-
-        //        if (pair.Symbol == "ACMBTC")
-        //        {
-        //            Console.WriteLine("<--------ACMBTC");
-        //        }
-
-        //        DateTime? lastHistoryTimeClose = null;
-        //        DateTime? lastHistoryTimeCloseNext = null;
-        //        if (curHistoryList.Count != 0)
-        //        {
-        //            var lastHistory = curHistoryList.Last();
-
-        //            var lastDateTime = DateTime.UnixEpoch.AddMilliseconds((double)lastHistory.UtcCloseTime);
-        //            lastHistoryTimeClose = lastDateTime;
-        //            lastHistoryTimeCloseNext = lastDateTime.AddMilliseconds((double)TradingDbUtilies.intervalLookup[KlineInterval.OneDay]);
-        //        }
-
-        //        DateTime epoch = DateTime.UnixEpoch;
-        //        DateTime now = DateTime.Now;
-        //        long nowMs = (long)(now.Subtract(epoch)).TotalSeconds;
-
-
-        //        if (lastHistoryTimeCloseNext != null && lastHistoryTimeCloseNext > DateTime.Now)
-        //        {
-        //            Console.WriteLine("pair " + pair.Symbol + " is already up to date");
-        //            onCompleted(new List<PriceHistory>());//consider task completed
-        //        }
-        //        else
-        //        {
-        //            TradingDbUtilies.GetPriceHistoryAsync(
-        //                KlineInterval.OneDay,
-        //                _client,
-        //                curHistory,
-        //                instrPair,
-        //                lastHistoryTimeClose
-        //            ).ContinueWith(hasCompleted);
-        //        }
-        //        //GetHistory(pair.Symbol);//save to db
-        //    }
-
-
-        //    return resultTask;
-        //}
-
-
+        
         [HttpGet("history/{symbol}")]
-
         public async Task<object> GetHistory(string symbol)
         {
 
@@ -261,104 +134,6 @@ namespace TradingAPI.Controllers
             return products.Data;
         }
 
-
-        //public async Task PopulateInstrumentTables(IEnumerable<BinanceProduct> products) // Only add whats missing
-        //{
-
-        //    Dictionary<string, Instrument> curInstrLookup = _context.Instrument.ToDictionary(i => i.Symbol);
-        //    Dictionary<string, Instrument> instTp = curInstrLookup;// new Dictionary<string, Instrument>();
-
-        //    List<Instrument> instruments = new List<Instrument>();
-        //    foreach (BinanceProduct p in products)
-        //    {
-        //        if (!instTp.ContainsKey(p.BaseAsset))
-        //        {
-        //            var instrTp = new Instrument
-        //            {
-        //                Symbol = p.BaseAsset,
-        //                SymbolChar = p.BaseAssetChar,
-        //                Name = p.BaseAssetName,
-        //                Type = "",//ignore for now
-        //            };
-        //            instTp[p.BaseAsset] = instrTp;//mark as taken
-        //            instruments.Add(instrTp);
-        //        }
-        //        if (!instTp.ContainsKey(p.QuoteAsset))
-        //        {
-        //            var instrTp = new Instrument
-        //            {
-        //                Symbol = p.QuoteAsset,
-        //                SymbolChar = p.QuoteAssetChar,
-        //                Name = p.QuoteAssetName,
-        //                Type = "",//ignore for now
-        //            };
-        //            instTp[p.QuoteAsset] = instrTp;//mark as taken
-        //            instruments.Add(instrTp);
-        //        }
-        //    }
-        //    //Save to DB
-        //    _context.Instrument.AddRange(instruments);
-        //    _context.SaveChanges();
-        //}
-
-        //public async Task PopulateInstrumentPairsTables(IEnumerable<BinanceProduct> products) // Only add whats missing
-        //{
-        //    Dictionary<string, Instrument> curInstrLookup = _context.Instrument.ToDictionary(i => i.Symbol);
-        //    Dictionary<string, Instrument> curInstru = curInstrLookup;// new Dictionary<string, Instrument>();
-
-        //    Dictionary<string, InstrumentPair> curPairsLookup = _context.InstrumentPair.ToDictionary(i => i.Symbol);
-        //    Dictionary<string, InstrumentPair> curPairs = curPairsLookup;// new Dictionary<string, InstrumentPair>();
-
-        //    List<Instrument> instruments = new List<Instrument>();
-        //    List<InstrumentPair> pairs = new List<InstrumentPair>();
-
-        //    foreach (BinanceProduct p in products)
-        //    {
-        //        if (!curInstru.ContainsKey(p.BaseAsset))
-        //        {
-        //            var instrTp = new Instrument
-        //            {
-        //                Symbol = p.BaseAsset,
-        //                SymbolChar = p.BaseAssetChar,
-        //                Name = p.BaseAssetName,
-        //                Type = "",//ignore for now
-        //            };
-        //            curInstru[p.BaseAsset] = instrTp;//mark as taken
-        //            instruments.Add(instrTp);
-        //        }
-        //        if (!curInstru.ContainsKey(p.QuoteAsset))
-        //        {
-        //            var instrTp = new Instrument
-        //            {
-        //                Symbol = p.QuoteAsset,
-        //                SymbolChar = p.QuoteAssetChar,
-        //                Name = p.QuoteAssetName,
-        //                Type = "",//ignore for now
-        //            };
-        //            curInstru[p.QuoteAsset] = instrTp;//mark as taken
-        //            instruments.Add(instrTp);
-        //        }
-
-        //        if (!curPairs.ContainsKey(p.Symbol))
-        //        {
-        //            var pairTp = new InstrumentPair()
-        //            {
-        //                Symbol = p.Symbol,
-        //                BaseInstrument = curInstru[p.BaseAsset],
-        //                QuoteInstrument = curInstru[p.QuoteAsset],
-        //            };
-        //            curPairs[p.Symbol] = pairTp;//mark as taken
-        //            pairs.Add(pairTp);
-        //        }
-        //    }
-
-        //    //Save to DB
-        //    _context.InstrumentPair.AddRange(pairs);
-
-        //    _context.SaveChanges();
-        //}
-
-
         [HttpGet("test")]
         public async Task<object> Test()//test
         {
@@ -369,7 +144,6 @@ namespace TradingAPI.Controllers
                 status = "No errors",
             };
         }
-
 
         [HttpGet("coinsSave")]
         public async Task<IEnumerable<InstrumentPair>> GetCoinsAndSave()//test
