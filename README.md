@@ -33,6 +33,10 @@ ________________
 
 ### Database design
 
+ERD:
+
+![image](https://user-images.githubusercontent.com/29706607/135987301-42dba226-0fc5-49a2-a93c-1eb3e8aa22fa.png)
+
 ### GraphQL
 
 The application API utilizes GraphQL (HotChocolate.net) which you can try out at https://localhost:5001/graphql/ (Banana Cake Pop), which is a pretty neat user interface and great for testing. It also shows you the graph schema.
